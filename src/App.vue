@@ -202,7 +202,7 @@ export default {
      #root {
        overflow: hidden;
        width: 100%;
-       height: 100vh;
+       max-height: 100vh;
        background-color: black;
        display: flex;
        align-items: center;
@@ -249,11 +249,12 @@ export default {
                  width: fit-content !important;
                  button {
                    font-family: Arial, Helvetica, sans-serif;
+                   font-weight: bold;
                    font-size: 14px;
                    background-color: black;
                    color: white;
                    cursor: grab;
-                   padding: 5px;
+                   padding: 5px 10px;
                    margin-left: 8px;
                    border: none;
                    &.current {
@@ -284,6 +285,7 @@ export default {
              display: flex;
              align-items: center;
              input[type=text] {
+               color: white;
                width: 80px;
                text-align: center;
                background: none;
@@ -317,6 +319,11 @@ export default {
        }
 
        .controls {
+         @media(max-width: 700px) {
+           bottom: 20px;
+           top: auto;
+           height: auto;
+         }
          top: 0;
          left: 0;
          position: absolute;
