@@ -32,7 +32,8 @@ export default {
         let _this = this
         img.onload = function () {
             _this.loading = false
-            _this.$refs.scanImg.appendChild(img)
+            if(_this.$refs.scanImg != null)
+                _this.$refs.scanImg.appendChild(img)
         }
         img.onerror = function () {
             _this.loading = false
@@ -44,9 +45,12 @@ export default {
 
 <style lang="scss" scoped>
     .error {
+        height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
+        text-align: center;
         p {
             color: red;
             font-size: 24px;

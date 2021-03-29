@@ -15,7 +15,7 @@
           </button>
         </div>
         <swiper v-if="discoveredComplete == true" slides-per-view="auto">
-          <swiper-slide v-for="page in discoveredPage" :key="page.id">
+          <swiper-slide v-for="page in getDiscovered" :key="page.id">
             <button @click="goTo(page.id)" :class="{current: currentPage(page.id)}">{{page.id}}</button>
           </swiper-slide>
         </swiper>
@@ -64,6 +64,7 @@ export default {
       page: 1,
       discoveredComplete: false,
       discoveredPage: [],
+      multiRequest: false,
       menu: false
     }
   },
@@ -72,6 +73,9 @@ export default {
       return [
         this.path(this.rootPath, this.scan, this.page)
       ]
+    },
+    getDiscovered() {
+      return this.discoveredPage
     }
   },
   watch: {
@@ -80,6 +84,7 @@ export default {
       this.discoveredComplete = false
       this.discoveredPage = []
       this.discovering()
+      console.log(this.discoveredPage.length)
     }
   },
   methods: {
@@ -110,12 +115,13 @@ export default {
     openMenu() {
       this.menu = !this.menu
     },
-    validImage(page) {
+    validImage(page, array) {
       return new Promise((resolve, reject) => {
         let image = new Image()
         image.src = this.path(this.rootPath, this.scan, page)
+        array.scan = this.scan
         image.onload = () => {
-          this.discoveredPage.push({
+          array.pages.push({
             id: page,
             link: this.path(this.rootPath, this.scan, page)
           })
@@ -128,12 +134,19 @@ export default {
     },
     async discovering() {
       let page = this.page
+      let array = {
+        scan: this.page,
+        pages: []
+      }
       let res = false
       while(res != true) {
-          res = await this.validImage(page)
+          res = await this.validImage(page, array)
           page += 1
       }
-      this.discoveredComplete = true
+      if(array.scan == this.scan) {
+        this.discoveredPage = array.pages
+        this.discoveredComplete = true
+      }
     },
     currentPage(id) {
       return id === this.page
