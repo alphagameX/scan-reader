@@ -21,7 +21,7 @@
         </swiper>
        <div v-else class="loading">
           <p>Toutes les pages sont entrain d'etre trouvé pour le scan {{scan}}</p>
-          <img src="200.gif"/>
+          <img src="/200.gif"/>
        </div>
         
       </nav>

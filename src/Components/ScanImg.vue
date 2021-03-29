@@ -1,11 +1,11 @@
 <template>
     <div v-if="loading">
-        <img src="200.gif"/>
+        <img src="/200.gif"/>
     </div>
 
     <div v-if="error == true" class="error">
         <p>Le chargement de la page est impossible ou vous avez atteint la fin du scan !</p>
-        <img src="error.webp"/>
+        <img src="/error.webp"/>
     </div>
     <span v-else ref="scanImg"></span>
 </template>
