@@ -320,6 +320,7 @@ export default {
 
        .controls {
          @media(max-width: 700px) {
+           position: fixed;
            bottom: 20px;
            top: auto;
            height: auto;
