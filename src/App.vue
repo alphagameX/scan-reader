@@ -84,7 +84,6 @@ export default {
       this.discoveredComplete = false
       this.discoveredPage = []
       this.discovering()
-      console.log(this.discoveredPage.length)
     }
   },
   methods: {
@@ -92,6 +91,8 @@ export default {
      if(this.discoveredComplete === true) {
        if(this.page < this.discoveredPage.length)
         this.page++
+        else
+        this.scan++
      } else { 
        this.page++
      }
@@ -99,6 +100,8 @@ export default {
     prev() {
       if(this.page > 1)
         this.page--
+      else
+        this.scan--
     },
     goTo(id) {
       this.page = id
